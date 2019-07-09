@@ -21,7 +21,7 @@ for file in files:
     print('insertting'+file)
     f = open(file,encoding='utf-8')
     for each_line in f:
-        x = str(each_line).replace('\'', 'null').replace('\\','').rsplit(',')
+        x = str(each_line).replace('\'', 'null').replace('\\','').replace('\\n','').rsplit(',')
         try:
             dictX = {'Name': x[0], 'CardNo': x[1], 'Descriot': x[2], 'CtfTp': x[3], 'CtfId': x[4], 'Gender': x[5],
                     'Birthday': x[6], 'Address': x[7], 'Zip': x[8], 'Dirty': x[9], 'District1': x[10], 'District2': x[11],
