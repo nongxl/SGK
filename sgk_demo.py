@@ -20,7 +20,7 @@ files = [#'D:\\dictionary\\酒店2000W数据库csv格式\\1-200W.csv','D:\\dicti
          #'D:\\dictionary\\酒店2000W数据库csv格式\\800W-1000W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\1000W-1200W.csv',
          #'D:\\dictionary\\酒店2000W数据库csv格式\\1200W-1400W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\1400W-1600W.csv',
          #'D:\\dictionary\\酒店2000W数据库csv格式\\1600w-1800w.csv','D:\\dictionary\\酒店2000W数据库csv格式\\1800w-2000w.csv',
-         'D:\\dictionary\\酒店2000W数据库csv格式\\last5000NEW.xlsx']
+         'D:\\dictionary\\酒店2000W数据库csv格式\\2.csv','D:\\dictionary\\酒店2000W数据库csv格式\\last5000NEW2.csv']
 i = 0
 for file in files:
     print('insertting'+file)
@@ -47,20 +47,20 @@ for file in files:
                         dictX['District3'],dictX['District4'],dictX['District5'],dictX['District6'],dictX['FirstNm'],dictX['LastNm'],
                         dictX['Duty'],dictX['Mobile'],dictX['Tel'],dictX['Fax'],dictX['EMail'],dictX['Nation'],dictX['Taste'],
                         dictX['Education'],dictX['Company'],dictX['CTel'],dictX['CAddress'],dictX['CZip'],dictX['Family'],dictX['Version'],dictX['id'])
+            '''
             i = i+1
             if i == 3:
                 break
+            '''
             try:
                 cursor.execute(sql)
             except BaseException as e:
                 print(e,sql)
-                continue
         except BaseException as err:
             print(err,file,x)
-            continue
     print(file+'done insert!')
-    #dele = '''DELETE FROM hotel_2000w WHERE Name = '﻿Name';'''
-    #cursor.execute(dele)
+    dele = '''DELETE FROM hotel_2000w WHERE Name = '﻿Name';'''
+    cursor.execute(dele)
     f.close()
 cursor.close()
 cnx.close()

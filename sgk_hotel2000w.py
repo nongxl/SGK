@@ -1,6 +1,5 @@
 #处理酒店200W条数据库
 import mysql.connector
-import sys
 config = {
              'user': 'nongxl',
              'password': 'qW2I?-#cj',
@@ -15,6 +14,7 @@ config = {
 }
 cnx = mysql.connector.connect(**config)  # 建立连接
 cursor = cnx.cursor(dictionary=True)
+logfile = 'D:\\dictionary\\酒店2000W数据库csv格式\\log.txt'
 files = ['D:\\dictionary\\酒店2000W数据库csv格式\\1-200W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\200W-400W.csv',
          'D:\\dictionary\\酒店2000W数据库csv格式\\400W-600W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\600W-800W.csv',
          'D:\\dictionary\\酒店2000W数据库csv格式\\800W-1000W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\1000W-1200W.csv',
@@ -50,13 +50,23 @@ for file in files:
                 cursor.execute(sql)
             except BaseException as e:
                 print(e,sql)
+                l = open(logfile, mode='a',encoding='utf-8')
+                l.writelines(str(e))
+                l.writelines(sql)
+                l.close()
                 continue
         except BaseException as err:
             print(err,file,x)
+            l = open(logfile, mode='a', encoding='utf-8')
+            l.writelines(str(err))
+            l.writelines(file)
+            l.writelines(x)
+            l.close()
             continue
     print(file+'done insert!')
-    #dele = '''DELETE FROM hotel_2000w WHERE Name = '﻿Name';'''
-    #cursor.execute(dele)
+    dele = '''DELETE FROM hotel_2000w WHERE Name = '﻿Name';'''
+    cursor.execute(dele)
     f.close()
+
 cursor.close()
 cnx.close()
