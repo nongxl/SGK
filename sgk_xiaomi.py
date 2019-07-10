@@ -1,4 +1,4 @@
-#测试
+#处理酒店200W条数据库
 import mysql.connector
 config = {
              'user': 'nongxl',
@@ -15,12 +15,13 @@ config = {
 cnx = mysql.connector.connect(**config)  # 建立连接
 cursor = cnx.cursor(dictionary=True)
 logfile = 'D:\\dictionary\\xiaomi_log.txt'
-files = ['D:\\dictionary\\xiaomi_test.txt']
+files = ['D:\\dictionary\\xiaomi_com.txt']
 i = 2
 for file in files:
     f = open(file,encoding='utf-8')
+    #有些人取名用了特殊字符，需要处理一下。
     for each_line in f:
-        x = each_line.replace('\'', '').replace('\\', '').replace('\"', '').rsplit('|')
+        x = str(each_line).replace('\'', '').replace('\\', '').replace('\"', '').rsplit('|')
         x.remove(x[0])
         while(len(x) > 5):
             x[i] = x[i-1] + x[i]
