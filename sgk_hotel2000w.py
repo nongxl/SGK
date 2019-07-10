@@ -1,13 +1,17 @@
 #处理酒店200W条数据库
 import mysql.connector
+import sys
 config = {
-      'user': 'nongxl',
-      'password': 'qW2I?-#cj',
-      'host': 'localhost',
-      'database': 'sgk',
-      'charset': 'utf8',
-      "connection_timeout": 5,
-      "use_pure": True
+             'user': 'nongxl',
+             'password': 'qW2I?-#cj',
+             'host': 'localhost',
+             'database': 'sgk',
+             'charset': 'utf8',
+             'pool_size': 10,
+             'pool_name': 'offlineserver',
+            'pool_reset_session': False,
+            'connection_timeout': 120,
+            'use_pure': True
 }
 cnx = mysql.connector.connect(**config)  # 建立连接
 cursor = cnx.cursor(dictionary=True)
@@ -44,13 +48,15 @@ for file in files:
                         dictX['Education'],dictX['Company'],dictX['CTel'],dictX['CAddress'],dictX['CZip'],dictX['Family'],dictX['Version'],dictX['id'])
             try:
                 cursor.execute(sql)
-            except Exception as e:
+            except BaseException as e:
                 print(e,sql)
-        except Exception as err:
-            print(err,x)
+                continue
+        except BaseException as err:
+            print(err,file,x)
+            continue
     print(file+'done insert!')
-    dele = '''DELETE FROM hotel_2000w WHERE Name = '﻿Name';'''
-    cursor.execute(dele)
+    #dele = '''DELETE FROM hotel_2000w WHERE Name = '﻿Name';'''
+    #cursor.execute(dele)
     f.close()
 cursor.close()
 cnx.close()
