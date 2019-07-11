@@ -15,11 +15,10 @@ config = {
 cnx = mysql.connector.connect(**config)  # 建立连接
 cursor = cnx.cursor(dictionary=True)
 logfile = 'D:\\dictionary\\酒店2000W数据库csv格式\\log.txt'
-files = [#'D:\\dictionary\\酒店2000W数据库csv格式\\1-200W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\200W-400W.csv',
-         #'D:\\dictionary\\酒店2000W数据库csv格式\\400W-600W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\600W-800W.csv',
-         #'D:\\dictionary\\酒店2000W数据库csv格式\\800W-1000W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\1000W-1200W.csv',
-         #'D:\\dictionary\\酒店2000W数据库csv格式\\1200W-1400W.csv',
-         'D:\\dictionary\\酒店2000W数据库csv格式\\1400W-1600W.csv',
+files = ['D:\\dictionary\\酒店2000W数据库csv格式\\1-200W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\200W-400W.csv',
+         'D:\\dictionary\\酒店2000W数据库csv格式\\400W-600W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\600W-800W.csv',
+         'D:\\dictionary\\酒店2000W数据库csv格式\\800W-1000W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\1000W-1200W.csv',
+         'D:\\dictionary\\酒店2000W数据库csv格式\\1200W-1400W.csv','D:\\dictionary\\酒店2000W数据库csv格式\\1400W-1600W.csv',
          'D:\\dictionary\\酒店2000W数据库csv格式\\1600w-1800w.csv','D:\\dictionary\\酒店2000W数据库csv格式\\1800w-2000w.csv',
          'D:\\dictionary\\酒店2000W数据库csv格式\\last5000.csv']
 for file in files:

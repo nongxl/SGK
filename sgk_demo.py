@@ -14,43 +14,46 @@ config = {
 }
 cnx = mysql.connector.connect(**config)  # 建立连接
 cursor = cnx.cursor(dictionary=True)
-logfile = 'D:\\dictionary\\xiaomi_log.txt'
-files = ['D:\\dictionary\\xiaomi_test.txt']
-i = 2
+logfile = 'D:\\dictionary\\amazonCN\\amazon.log'
+files = ['D:\\dictionary\\amazonCN\\amazon.cn_sheet1.csv',
+         #'D:\\dictionary\\amazonCN\\amazon.cn_sheet2.csv',
+         #'D:\\dictionary\\amazonCN\\amazon.cn_sheet3.csv','D:\\dictionary\\amazonCN\\amazon.cn_sheet4.csv'
+         ]
+i = 0
 for file in files:
     f = open(file,encoding='utf-8')
     for each_line in f:
-        x = each_line.replace('\'', '').replace('\\', '').replace('\"', '').rsplit('|')
-        x.remove(x[0])
-        while(len(x) > 5):
-            x[i] = x[i-1] + x[i]
-            x.remove(x[1])
+        x = each_line.replace('\'', '').replace('\t', ',').replace('\"', '').rsplit(',')
+        i = i+1
+        if i == 2:
+            break
         try:
-            dictX = {'id_xiaomi': x[0], 'usrNam': x[1], 'pwd': x[2], 'account': x[3], 'IPAddr': x[4], 'notice': ''}
+            dictX = {'account': x[0], 'name': x[1], 'tell': x[2], 'mail': x[3],'notice':''}
+            print(dictX)
             sql = '''
-                    INSERT INTO xiaomi_com
-                    (id_xiaomi,usrNam,pwd,account,IPAddr,notice)
+                    INSERT INTO amazonCN
+                    (account,name,tell,mail,notice)
                     VALUES
-                    (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\');
-                    ''' % (dictX['id_xiaomi'],dictX['usrNam'],dictX['pwd'],dictX['account'],dictX['IPAddr'],dictX['notice'])
+                    (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\');
+                    ''' % (dictX['account'],dictX['name'],dictX['tell'],dictX['mail'],dictX['notice'])
             try:
                 cursor.execute(sql)
+                print(sql)
             except BaseException as e:
                 print(e,sql)
-                l = open(logfile, mode='a',encoding='utf-8')
-                l.writelines(str(e))
-                l.writelines(sql)
-                l.close()
+                #l = open(logfile, mode='a',encoding='utf-8')
+                #l.writelines(str(e))
+                #l.writelines(sql)
+                #l.close()
                 continue
         except BaseException as err:
             print(err,file,str(each_line))
-            l = open(logfile, mode='a', encoding='utf-8')
-            l.writelines(str(err))
-            l.writelines(file)
-            l.writelines(str(each_line))
-            l.close()
+            #l = open(logfile, mode='a', encoding='utf-8')
+            #l.writelines(str(err))
+            #l.writelines(file)
+            #l.writelines(str(each_line))
+            #l.close()
             continue
-    l = open(logfile, mode='a', encoding='utf-8')
     f.close()
 
 cursor.close()
