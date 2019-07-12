@@ -21,7 +21,7 @@ files = ['D:\\dictionary\\amazonCN\\amazon.cn_sheet1.csv','D:\\dictionary\\amazo
 for file in files:
     f = open(file,encoding='utf-8')
     for each_line in f:
-        x = each_line.replace('\'', '').replace('\t', ',').replace('\"', '').rsplit(',')
+        x = each_line.replace('\'', '').replace(' ', '').replace('\"', '').rsplit(',')
         try:
             dictX = {'account': x[0], 'name': x[1], 'tell': x[2], 'mail': x[3],'notice':''}
             sql = '''
