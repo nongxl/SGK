@@ -1,4 +1,4 @@
-#测试
+#实现查询
 import mysql.connector,sys,time
 config = {
              'user': 'nongxl',
