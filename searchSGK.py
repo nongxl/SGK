@@ -1,4 +1,4 @@
-#实现查询
+#测试
 import mysql.connector,sys,time
 config = {
              'user': 'nongxl',
@@ -21,8 +21,8 @@ def search(sql):
     result = cursor.fetchall()
     cursor.close()
     i = 0
+    print('姓名      手机号        邮箱            身份证                地址')
     for res in result:
-        print('姓名      手机号        邮箱            身份证                地址')
         print(res['Name'],res['Mobile'],res['Email'],res['CtfId'],res['Address'])
         i = i+1
     print('共查询到'+ str(i) +'条记录')
@@ -33,9 +33,21 @@ def search(sql):
 
 argv = sys.argv
 print(argv)
-if len(argv) <3:
+if len(argv) < 4:
     print('Usage: python searchSGK.py [-N,-M,-C,-E] [Name,Mobile,CtfId,Email]')
     print('Example:python searchSGK.py -N 李华')
+elif len(argv) == 4 and argv[1] == '--NE':
+    argvN = argv[2]
+    argvE = argv[3]
+    print('按姓名地址' + str(argvN)+ str(argvE) + '组合模糊查找')
+    sql = '''
+            SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\' 
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\'
+            ORDER BY
+            Name;
+    ''' % (argvN, argvE, argvN, argvE)
+    search(sql)
 else:
     if argv[1] == '-N':
         argv = argv[2]
@@ -89,9 +101,11 @@ else:
                 SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Email  LIKE \'%%%s%%\'
                 UNION ALL
                 SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Email  LIKE \'%%%s%%\'
+                UNION ALL
+                SELECT usrNam,NULL,account,NULL,IPAddr FROM xiaomi_com WHERE account  LIKE \'%%%s%%\'
                 ORDER BY
                 Email;
-        ''' % (argv, argv, argv, argv)
+        ''' % (argv, argv, argv, argv,argv)
         search(sql)
     elif argv[1] == '-A':
         argv = argv[2]
@@ -104,6 +118,7 @@ else:
         print(sql)
         search(sql)
     else:
+        print(len(argv))
         print('Usage: python searchSGK.py [-N,-M,-C,-E] [Name,Mobile,CtfId,Email]')
         print('Example:python searchSGK.py -N 李华')
         print('Example:python searchSGK.py -M 13012345678')
