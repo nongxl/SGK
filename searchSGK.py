@@ -1,5 +1,5 @@
 #测试
-import mysql.connector,sys,time
+import mysql.connector,sys
 config = {
              'user': 'nongxl',
              'password': 'qW2I?-#cj',
@@ -14,7 +14,6 @@ config = {
 }
 
 def search(sql):
-    t1 = time.process_time()
     cnx = mysql.connector.connect(**config)  # 建立连接
     cursor = cnx.cursor(dictionary=True)
     cursor.execute(sql)
@@ -26,14 +25,10 @@ def search(sql):
         print(res['Name'],res['Mobile'],res['Email'],res['CtfId'],res['Address'])
         i = i+1
     print('共查询到'+ str(i) +'条记录')
-    t2 = time.process_time()
-    print(t1,t2)
-    t = t2 - t1
-    print(t)
 
 argv = sys.argv
 print(argv)
-if len(argv) < 4:
+if len(argv) < 3:
     print('Usage: python searchSGK.py [-N,-M,-C,-E] [Name,Mobile,CtfId,Email]')
     print('Example:python searchSGK.py -N 李华')
 elif len(argv) == 4 and argv[1] == '--NE':
