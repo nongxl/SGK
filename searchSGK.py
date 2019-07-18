@@ -31,17 +31,17 @@ print(argv)
 if len(argv) < 3:
     print('Usage: python searchSGK.py [-N,-M,-C,-E] [Name,Mobile,CtfId,Email]')
     print('Example:python searchSGK.py -N 李华')
-elif len(argv) == 4 and argv[1] == '--NE':
+elif len(argv) == 4 and argv[1] == '--NA':
     argvN = argv[2]
-    argvE = argv[3]
-    print('按姓名地址' + str(argvN)+ str(argvE) + '组合模糊查找')
+    argvA = argv[3]
+    print('按姓名地址' + str(argvN)+ str(argvA) + '组合模糊查找')
     sql = '''
             SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\' 
             UNION ALL
             SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\'
             ORDER BY
             Name;
-    ''' % (argvN, argvE, argvN, argvE)
+    ''' % (argvN, argvA, argvN, argvA)
     search(sql)
 else:
     if argv[1] == '-N':
