@@ -76,7 +76,7 @@ def witchSQL(option,argv):
 argvs = sys.argv
 if len(argvs) < 3:
     print('Usage: python searchSGK.py [-N,-M,-C,-E] [File Path]')
-    print('Example:python searchSGK.py -N D:/text.txt')
+    print(r'Example:python searchSGK.py -N D:\text.txt')
 else:
     option = argvs[1]
     file = argvs[2]
