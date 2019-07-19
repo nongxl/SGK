@@ -1,3 +1,4 @@
+show variables like '%storage_engine%';
 CREATE TABLE IF NOT EXISTS `12306_13w`(
    `Account` VARCHAR(40) NOT NULL,
    `PWD1` VARCHAR(40) NOT NULL,
@@ -99,14 +100,23 @@ select count(*) from amazoncn;
 
 #DROP TABLE dangdang;
 CREATE TABLE IF NOT EXISTS `dangdang`(
-   `Name` VARCHAR(60) NOT NULL,
-   `Address` VARCHAR(100) NOT NULL,
-	 `Mobile` VARCHAR(60) NOT NULL,
-	 `Email` VARCHAR(50) NOT NULL,
+   `Name` VARCHAR(60),
+   `Address` VARCHAR(100),
+	 `Mobile` VARCHAR(60),
+	 `Email` VARCHAR(50),
 	 `notice` VARCHAR(40),
    PRIMARY KEY ( `name` )
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 select count(*) from dangdang;
+
+CREATE TABLE IF NOT EXISTS `vancl`(
+   `Name` VARCHAR(60) NOT NULL,
+   `Address` VARCHAR(100),
+	 `Mobile` VARCHAR(60),
+	 `zip` VARCHAR(50),
+	 `notice` VARCHAR(40)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+select count(*) from vancl;
 
 
 #建表的时候没注意优化的问题
@@ -210,10 +220,10 @@ ALTER TABLE dangdang CHANGE tell Mobile VARCHAR(60);
 ALTER TABLE dangdang CHANGE mail Email VARCHAR(50);
 
 #查询语句
-SELECT Name,Mobile,Email,CtfId FROM hotel_2000w WHERE Name = '李华';
-SELECT Name,Mobile,Email,CtfId FROM 12306_13w WHERE Name = '李华';
-SELECT Name,Mobile,Email FROM amazoncn WHERE Name = '李华';
-SELECT Name,Mobile,Email FROM dangdang WHERE Name = '李华';
+SELECT Name,Mobile,Email,CtfId FROM hotel_2000w WHERE Name = '张三';
+SELECT Name,Mobile,Email,CtfId FROM 12306_13w WHERE Name = '张三';
+SELECT Name,Mobile,Email FROM amazoncn WHERE Name = '张三';
+SELECT Name,Mobile,Email FROM dangdang WHERE Name = '张三';
 
 #按姓名组合查询
 SELECT Name,Mobile,Email,CtfId FROM hotel_2000w WHERE Name = '李华'
@@ -223,6 +233,44 @@ UNION ALL
 SELECT Name,Mobile,Email,NULL FROM amazoncn WHERE Name = '李华'
 UNION ALL
 SELECT Name,Mobile,Email,NULL FROM dangdang WHERE Name = '李华';
+
+SELECT count(*) FROM babe;
+ALTER TABLE babe CHANGE real_name Name VARCHAR(50);
+ALTER TABLE babe CHANGE email Email VARCHAR(50);
+ALTER TABLE babe CHANGE id_number CtfId VARCHAR(40);
+ALTER TABLE babe CHANGE phone Mobile VARCHAR(40);
+ALTER TABLE babe CHANGE school Address VARCHAR(100);
+
+DELETE FROM babe WHERE id = 'id';
+
+SELECT COUNT(1) as repetitions,id,Name
+FROM babe
+GROUP BY Name
+HAVING repetitions > 1;
+
+CREATE TABLE tmp SELECT * FROM babe GROUP BY Name,id;
+DROP TABLE babe;
+ALTER TABLE tmp RENAME babe;
+SELECT * FROM babe;
+
+SELECT COUNT(1) FROM vancl;
+
+#DROP TABLE inoherb;
+CREATE TABLE IF NOT EXISTS `inoherb`(
+   `account` VARCHAR(60),
+	 `Name` VARCHAR(60) NOT NULL,
+   `Address` VARCHAR(100),
+	 `Email` VARCHAR(50),
+	 `zip` VARCHAR(40),
+	 `Mobile` VARCHAR(60),
+	 `notice` VARCHAR(100)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+select count(*) from inoherb;
+
+
+
+
+
 
 
 
