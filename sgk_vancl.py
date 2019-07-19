@@ -15,7 +15,7 @@ config = {
 cnx = mysql.connector.connect(**config)  # 建立连接
 cursor = cnx.cursor(dictionary=True)
 logfile = 'D:\\dictionary\\vancl\\vancl.log'
-files = ['D:\\dictionary\\vancl\\vancl_com1.xls','D:\\dictionary\\vancl\\vancl_com2.xls','D:\\dictionary\\vancl\\vancl_com3.xls']
+files = ['D:\\dictionary\\vancl\\vancl_com1.csv','D:\\dictionary\\vancl\\vancl_com2.csv','D:\\dictionary\\vancl\\vancl_com3.csv']
 for file in files:
     f = open(file,encoding='utf-8')
     for each_line in f:

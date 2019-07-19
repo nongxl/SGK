@@ -29,7 +29,7 @@ def search(sql):
 argv = sys.argv
 print(argv)
 if len(argv) < 3:
-    print('Usage: python searchSGK.py [-N,-M,-C,-E] [Name,Mobile,CtfId,Email]')
+    print('Usage: python searchSGK.py [-N,-M,-C,-E,-A,--NA] [Name,Mobile,CtfId,Email,Address,Name Address]')
     print('Example:python searchSGK.py -N 李华')
 elif len(argv) == 4 and argv[1] == '--NA':
     argvN = argv[2]
@@ -39,9 +39,11 @@ elif len(argv) == 4 and argv[1] == '--NA':
             SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\' 
             UNION ALL
             SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\'
             ORDER BY
             Name;
-    ''' % (argvN, argvA, argvN, argvA)
+    ''' % (argvN, argvA, argvN, argvA, argvN, argvA)
     search(sql)
 else:
     if argv[1] == '-N':
@@ -57,9 +59,11 @@ else:
                 SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Name = \'%s\'
                 UNION ALL
                 SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Name = \'%s\'
+                UNION ALL
+                SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Name = \'%s\'
                 ORDER BY
                 Name;
-        ''' % (argv, argv, argv, argv,argv)
+        ''' % (argv, argv, argv, argv,argv,argv)
         search(sql)
     elif argv[1] == '-M':
         argv = argv[2]
@@ -74,9 +78,11 @@ else:
                 SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Mobile = \'%s\'
                 UNION ALL
                 SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Mobile = \'%s\'
+                UNION ALL
+                SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Mobile = \'%s\'
                 ORDER BY
                 Mobile;
-        ''' % (argv, argv, argv, argv,argv)
+        ''' % (argv, argv, argv, argv,argv,argv)
         search(sql)
     elif argv[1] == '-C':
         argv = argv[2]
@@ -119,11 +125,14 @@ else:
                 SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Address LIKE \'%%%s%%\'
                 UNION ALL
                 SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Address LIKE \'%%%s%%\'
-                ;
-        ''' % (argv,argv,argv)
+                UNION ALL
+                SELECT Name,Mobile,NULL,NULL,Address FROM babe WHERE Address LIKE \'%%%s%%\'
+                ORDER BY
+                Address;
+        ''' % (argv,argv,argv,argv)
         search(sql)
     else:
         print(len(argv))
-        print('Usage: python searchSGK.py [-N,-M,-C,-E] [Name,Mobile,CtfId,Email]')
+        print('Usage: python searchSGK.py [-N,-M,-C,-E,-A,--NA] [Name,Mobile,CtfId,Email,Address,Name Address]')
         print('Example:python searchSGK.py -N 李华')
         print('Example:python searchSGK.py -M 13012345678')
