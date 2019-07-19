@@ -55,9 +55,11 @@ else:
                 SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Name = \'%s\'
                 UNION ALL
                 SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Name = \'%s\'
+                UNION ALL
+                SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Name = \'%s\'
                 ORDER BY
                 Name;
-        ''' % (argv, argv, argv, argv)
+        ''' % (argv, argv, argv, argv,argv)
         search(sql)
     elif argv[1] == '-M':
         argv = argv[2]
@@ -70,9 +72,11 @@ else:
                 SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Mobile = \'%s\'
                 UNION ALL
                 SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Mobile = \'%s\'
+                UNION ALL
+                SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Mobile = \'%s\'
                 ORDER BY
                 Mobile;
-        ''' % (argv, argv, argv, argv)
+        ''' % (argv, argv, argv, argv,argv)
         search(sql)
     elif argv[1] == '-C':
         argv = argv[2]
@@ -81,9 +85,11 @@ else:
                 SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE CtfId  LIKE \'%%%s%%\'
                 UNION ALL
                 SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE CtfId LIKE \'%%%s%%\'
+                UNION ALL
+                SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE CtfId LIKE \'%%%s%%\'
                 ORDER BY
                 CtfId;
-        ''' % (argv,argv)
+        ''' % (argv,argv,argv)
         search(sql)
     elif argv[1] == '-E':
         argv = argv[2]
@@ -98,9 +104,11 @@ else:
                 SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Email  LIKE \'%%%s%%\'
                 UNION ALL
                 SELECT usrNam,NULL,account,NULL,IPAddr FROM xiaomi_com WHERE account  LIKE \'%%%s%%\'
+                UNION ALL
+                SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Email LIKE \'%%%s%%\'
                 ORDER BY
                 Email;
-        ''' % (argv, argv, argv, argv,argv)
+        ''' % (argv, argv, argv, argv,argv,argv)
         search(sql)
     elif argv[1] == '-A':
         argv = argv[2]
@@ -108,9 +116,11 @@ else:
         sql = '''
                 SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Address LIKE \'%%%s%%\'
                 UNION ALL
-                SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Address LIKE \'%%%s%%\';
-        ''' % (argv,argv)
-        print(sql)
+                SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Address LIKE \'%%%s%%\'
+                UNION ALL
+                SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Address LIKE \'%%%s%%\'
+                ;
+        ''' % (argv,argv,argv)
         search(sql)
     else:
         print(len(argv))
