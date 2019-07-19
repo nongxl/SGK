@@ -41,9 +41,11 @@ elif len(argv) == 4 and argv[1] == '--NA':
             SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\'
             UNION ALL
             SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Name = \'%s\' AND Address LIKE \'%%%s%%\'
             ORDER BY
             Name;
-    ''' % (argvN, argvA, argvN, argvA, argvN, argvA)
+    ''' % (argvN,argvA,argvN,argvA,argvN,argvA,argvN,argvA)
     search(sql)
 else:
     if argv[1] == '-N':
@@ -61,9 +63,11 @@ else:
                 SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Name = \'%s\'
                 UNION ALL
                 SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Name = \'%s\'
+                UNION ALL
+                SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Name = \'%s\'
                 ORDER BY
                 Name;
-        ''' % (argv, argv, argv, argv,argv,argv)
+        ''' % (argv, argv, argv, argv,argv,argv,argv)
         search(sql)
     elif argv[1] == '-M':
         argv = argv[2]
@@ -80,9 +84,11 @@ else:
                 SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Mobile = \'%s\'
                 UNION ALL
                 SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Mobile = \'%s\'
+                UNION ALL
+                SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Mobile = \'%s\'
                 ORDER BY
                 Mobile;
-        ''' % (argv, argv, argv, argv,argv,argv)
+        ''' % (argv, argv, argv, argv,argv,argv,argv)
         search(sql)
     elif argv[1] == '-C':
         argv = argv[2]
@@ -112,9 +118,11 @@ else:
                 SELECT usrNam,NULL,account,NULL,IPAddr FROM xiaomi_com WHERE account  LIKE \'%%%s%%\'
                 UNION ALL
                 SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Email LIKE \'%%%s%%\'
+                UNION ALL
+                SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Email LIKE \'%%%s%%\'
                 ORDER BY
                 Email;
-        ''' % (argv, argv, argv, argv,argv,argv)
+        ''' % (argv, argv, argv, argv,argv,argv,argv)
         search(sql)
     elif argv[1] == '-A':
         argv = argv[2]
@@ -127,9 +135,13 @@ else:
                 SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Address LIKE \'%%%s%%\'
                 UNION ALL
                 SELECT Name,Mobile,NULL,NULL,Address FROM babe WHERE Address LIKE \'%%%s%%\'
+                UNION ALL
+                SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Address LIKE \'%%%s%%\'
+                UNION ALL
+                SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Address LIKE \'%%%s%%\'
                 ORDER BY
                 Address;
-        ''' % (argv,argv,argv,argv)
+        ''' % (argv,argv,argv,argv,argv,argv)
         search(sql)
     else:
         print(len(argv))
