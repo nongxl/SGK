@@ -27,7 +27,7 @@ for file in files:
                     (Name,Mobile,Address,zip,notice)
                     VALUES
                     (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\');
-                    ''' % (dictX['Name'],dictX['Address'],dictX['Mobile'],dictX['zip'],dictX['notice'])
+                    ''' % (dictX['Name'],dictX['Mobile'],dictX['Address'],dictX['zip'],dictX['notice'])
             try:
                 cursor.execute(sql)
             except BaseException as e:
