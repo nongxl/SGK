@@ -5,56 +5,84 @@ def batchSeach(sql,argv):
     pass
 def witchSQL(option,argv):
     sqlN = '''
-                SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Name = \'%s\'
-                UNION ALL
-                SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE Name = \'%s\'
-                UNION ALL
-                SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Name = \'%s\'
-                UNION ALL
-                SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Name = \'%s\'
-                ORDER BY
-                Name;
-        ''' % (argv, argv, argv, argv)
+            SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Name = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE Name = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Name = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Name = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Name = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Name = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Name = \'%s\'
+            ORDER BY
+            Name;
+    ''' % (argv, argv, argv, argv, argv, argv, argv)
 
     sqlM = '''
-                SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Mobile = \'%s\'
-                UNION ALL
-                SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE Mobile = \'%s\'
-                UNION ALL
-                SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Mobile = \'%s\'
-                UNION ALL
-                SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Mobile = \'%s\'
-                ORDER BY
-                Mobile;
-        ''' % (argv, argv, argv, argv)
+            SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Mobile = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE Mobile = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Mobile = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Mobile = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Mobile = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Mobile = \'%s\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Mobile = \'%s\'
+            ORDER BY
+            Mobile;
+    ''' % (argv, argv, argv, argv, argv, argv, argv)
 
     sqlC = '''
-                SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE CtfId  LIKE \'%%%s%%\'
-                UNION ALL
-                SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE CtfId LIKE \'%%%s%%\'
-                ORDER BY
-                CtfId;
-        ''' % (argv, argv)
+            SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE CtfId  LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE CtfId LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE CtfId LIKE \'%%%s%%\'
+            ORDER BY
+            CtfId;
+    ''' % (argv, argv, argv)
 
     sqlE = '''
-                SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Email LIKE \'%%%s%%\'
-                UNION ALL
-                SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE Email LIKE \'%%%s%%\'
-                UNION ALL
-                SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Email  LIKE \'%%%s%%\'
-                UNION ALL
-                SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Email  LIKE \'%%%s%%\'
-                UNION ALL
-                SELECT usrNam,NULL,account,NULL,IPAddr FROM xiaomi_com WHERE account  LIKE \'%%%s%%\'
-                ORDER BY
-                Email;
-        ''' % (argv, argv, argv, argv, argv)
+            SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Email LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,NULL FROM 12306_13w WHERE Email LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,NULL FROM amazoncn WHERE Email  LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Email  LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT usrNam,NULL,account,NULL,IPAddr FROM xiaomi_com WHERE account  LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Email LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Email LIKE \'%%%s%%\'
+            ORDER BY
+            Email;
+    ''' % (argv, argv, argv, argv, argv, argv, argv)
 
     sqlA = '''
-                SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Address LIKE \'%%%s%%\'
-                UNION ALL
-                SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Address LIKE \'%%%s%%\';
-        ''' % (argv, argv)
+            SELECT Name,Mobile,Email,CtfId,Address FROM hotel_2000w WHERE Address LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM dangdang WHERE Address LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,CtfId,Address FROM babe WHERE Address LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,NULL,NULL,Address FROM babe WHERE Address LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,NULL,NULL,Address FROM vancl WHERE Address LIKE \'%%%s%%\'
+            UNION ALL
+            SELECT Name,Mobile,Email,NULL,Address FROM inoherb WHERE Address LIKE \'%%%s%%\'
+            ORDER BY
+            Address;
+    ''' % (argv, argv, argv, argv, argv, argv)
     if option == '-N':
         sql = sqlN
         return sql
